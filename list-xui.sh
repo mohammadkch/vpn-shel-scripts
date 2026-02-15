@@ -15,7 +15,8 @@ RESULT=$(sqlite3 -json "$DB" "
             json_extract(json_each.value, '$.email') AS client,
             json_extract(json_each.value, '$.enable') AS enable_val,
             json_extract(json_each.value, '$.totalGB') AS total,
-            json_extract(json_each.value, '$.id') AS uuid
+            json_extract(json_each.value, '$.id') AS uuid,
+			inbounds.remark AS remark
         FROM inbounds, json_each(inbounds.settings, '$.clients')
     ) $FILTER;
 ")
